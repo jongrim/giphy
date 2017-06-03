@@ -1,0 +1,17 @@
+html {
+  height: 100%;
+}
+
+body {
+  padding-top: 70px;
+  height: 100%;
+}
+
+.container {
+  min-height: 100%;
+}
+
+footer {
+  height: 25px;
+  margin-top: -25px;
+}
