@@ -13,8 +13,18 @@ var giphy = (function() {
       }
     });
 
+    url += '&limit=10';
     url += `&api_key=${apiKey}`;
     return url;
+  }
+
+  function processData(response) {
+    // verify response status
+    if (response.meta.status !== 200) {
+      return;
+    }
+    let giphs = response.data;
+    return giphs.map(gif => gif.images.original.url);
   }
 
   function getThatGif(query) {
@@ -23,8 +33,9 @@ var giphy = (function() {
     }
     $().get({
       url: buildURL(query),
-      success: // TODO
-    })
+      success: processData,
+      dataType: 'json'
+    });
   }
   var publicAPI = {
     getThatGif: getThatGif
