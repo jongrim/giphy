@@ -9,7 +9,20 @@ $(document).ready(function() {
 
   function addGifs() {
     let searchTerms = searchText.val();
-    console.log('Searched for:', searchTerms);
-    giphy.getThatGif(searchTerms, console.log);
+    giphy.getThatGif(searchTerms, displayGifs);
+  }
+
+  function displayGifs(giphyArray) {
+    giphyRow.prepend(
+      giphyArray
+        .map(gif => {
+          return gifHtml(gif);
+        })
+        .join('')
+    );
+  }
+
+  function gifHtml(gif) {
+    return `<img src='${gif}' class='thumbnail'/>`;
   }
 });
