@@ -23,17 +23,19 @@ var giphy = (function() {
     if (response.meta.status !== 200) {
       return;
     }
-    let giphs = response.data;
-    return giphs.map(gif => gif.images.original.url);
+    let gifs = response.data;
+    return gifs.map(gif => gif.images.original.url);
   }
 
-  function getThatGif(query) {
+  function getThatGif(query, fn) {
     if (query.length <= 0) {
       return;
     }
-    $().get({
+    $.get({
       url: buildURL(query),
-      success: processData,
+      success: function(response) {
+        fn(processData(response));
+      },
       dataType: 'json'
     });
   }

@@ -5,11 +5,11 @@ $(document).ready(function() {
   const giphyRow = $('#giphyRow');
 
   // Bind listeners
-  searchBtn.on('click', addGifs);
+  searchBtn.click(addGifs);
 
-  function addGifs(searchTerms) {
-    console.log('Searched for: ', searchTerms);
-    let gifs = giphy.getThatGif(searchTerms);
-    console.log(gifs);
+  function addGifs() {
+    let searchTerms = searchText.val();
+    console.log('Searched for:', searchTerms);
+    giphy.getThatGif(searchTerms, console.log);
   }
 });
