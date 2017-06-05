@@ -11,6 +11,14 @@ body {
   min-height: 100%;
 }
 
+#play, #pause {
+  position: absolute;
+  width: 200px;
+  z-index: 1;
+  font-size: 4rem;
+  color: white;
+}
+
 footer {
   height: 25px;
   margin-top: -25px;
