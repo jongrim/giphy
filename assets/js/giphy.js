@@ -24,7 +24,9 @@ var giphy = (function() {
       return;
     }
     let gifs = response.data;
-    return gifs.map(gif => gif.images.original.url);
+    return gifs.map(gif => {
+      return { animate: gif.images.fixed_width.url, still: gif.images.fixed_width_still.url };
+    });
   }
 
   function getThatGif(query, fn) {
