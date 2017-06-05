@@ -27,10 +27,22 @@ $(document).ready(function() {
 
   function createGifRow(giphyArray) {
     return giphyArray.map(gif => {
+      // create HTML elements
       let $gifCol = $('<div></div>').addClass('col-md-3 col-sm-6 col-xs-12');
+      let $gifThumbnailDiv = $('<div></div>').addClass('thumbnail');
       let $gifEl = gifHtml(gif);
+      let $gifCaption = $('<div></div>').addClass('caption').append(gifCaption(gif));
+
+      // bind click handler
       $gifEl.click(changeState);
-      $gifCol.append($gifEl);
+
+      // hide caption initially
+      $gifCaption.hide();
+
+      // append elements
+      $gifThumbnailDiv.append($gifEl);
+      $gifThumbnailDiv.append($gifCaption);
+      $gifCol.append($gifThumbnailDiv);
       return $gifCol;
     });
   }
@@ -41,17 +53,28 @@ $(document).ready(function() {
       .attr('data-animate', `${gif.animate}`)
       .attr('data-still', `${gif.still}`)
       .attr('state', 'animate')
-      .addClass('gif')
-      .addClass('thumbnail');
+      .addClass('gif');
     // return `<img src='${gif.animate}' data-animate='${gif.animate}' data-still='${gif.still}' class='gif'/>`;
+  }
+
+  function gifCaption(gif) {
+    // let captionBits = [];
+    let $rating = $('<h5></h5>').text(`Rating: ${gif.rating}`);
+    let $url = $('<h5></h5>').text(`URL: ${gif.url}`);
+    let $source = $('<h5></h5>').text(`Source: ${gif.source}`);
+
+    let $caption = $('<div></div>').append([$rating, $url, $source]);
+    return $caption;
   }
 
   function changeState(e) {
     let $gif = $(e.target);
     if ($gif.attr('state') === 'animate') {
       $gif.attr('src', $gif.attr('data-still')).attr('state', 'still');
+      $gif.next('.caption').slideToggle();
     } else {
       $gif.attr('src', $gif.attr('data-animate')).attr('state', 'animate');
+      $gif.next('.caption').slideToggle();
     }
   }
 });

@@ -25,7 +25,13 @@ var giphy = (function() {
     }
     let gifs = response.data;
     return gifs.map(gif => {
-      return { animate: gif.images.fixed_width.url, still: gif.images.fixed_width_still.url };
+      return {
+        animate: gif.images.fixed_width.url,
+        still: gif.images.fixed_width_still.url,
+        rating: gif.rating,
+        url: gif.url,
+        source: gif.source
+      };
     });
   }
 
