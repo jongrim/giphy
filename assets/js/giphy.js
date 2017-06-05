@@ -4,7 +4,7 @@ var giphy = (function() {
   function buildSearchURL(query) {
     var searchTerms = query.split(' ');
 
-    var url = 'http://api.giphy.com/v1/gifs/search?q=';
+    var url = 'https://api.giphy.com/v1/gifs/search?q=';
 
     searchTerms.forEach((term, i) => {
       url += `${term}`;
@@ -50,7 +50,7 @@ var giphy = (function() {
 
   function getTrendingGifs(fn) {
     $.get({
-      url: `http://api.giphy.com/v1/gifs/trending?api_key=${apiKey}`,
+      url: `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}`,
       success: function(response) {
         fn(processData(response), 'Trending');
       }
