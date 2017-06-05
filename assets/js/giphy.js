@@ -1,19 +1,19 @@
 var giphy = (function() {
   var apiKey = 'dc6zaTOxFJmzC';
 
-  function buildURL(query) {
+  function buildSearchURL(query) {
     var searchTerms = query.split(' ');
 
-    var url = 'http://api.giphy.com/v1/gifs/search?';
+    var url = 'http://api.giphy.com/v1/gifs/search?q=';
 
     searchTerms.forEach((term, i) => {
-      url += `q=${term}`;
+      url += `${term}`;
       if (i < searchTerms.length - 1) {
-        url += '&';
+        url += '+';
       }
     });
 
-    url += '&limit=10';
+    url += '&limit=12';
     url += `&api_key=${apiKey}`;
     return url;
   }
@@ -40,15 +40,26 @@ var giphy = (function() {
       return;
     }
     $.get({
-      url: buildURL(query),
+      url: buildSearchURL(query),
       success: function(response) {
-        fn(processData(response));
+        fn(processData(response), query);
       },
       dataType: 'json'
     });
   }
+
+  function getTrendingGifs(fn) {
+    $.get({
+      url: `http://api.giphy.com/v1/gifs/trending?api_key=${apiKey}`,
+      success: function(response) {
+        fn(processData(response), 'Trending');
+      }
+    });
+  }
+
   var publicAPI = {
-    getThatGif: getThatGif
+    getThatGif: getThatGif,
+    getTrendingGifs: getTrendingGifs
   };
   return publicAPI;
 })();

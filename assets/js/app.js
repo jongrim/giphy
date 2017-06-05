@@ -5,21 +5,27 @@ $(document).ready(function() {
   const $giphyRow = $('#giphyRow');
   const $play = $('#play');
   const $pause = $('#pause');
+  const $trending = $('#trendingSelector');
 
   // Bind listeners
-  $searchBtn.click(addGifs);
+  $searchBtn.click(searchForGifs);
   $('img').click(changeState);
+  $trending.click(getTrendingGifs);
 
   // hide glyphicons to start
   $play.fadeOut(0);
   $pause.fadeOut(0);
 
-  function addGifs() {
+  function searchForGifs() {
     let searchTerms = $searchText.val();
     giphy.getThatGif(searchTerms, displayGifs);
   }
 
-  function displayGifs(giphyArray) {
+  function getTrendingGifs() {
+    giphy.getTrendingGifs(displayGifs);
+  }
+
+  function displayGifs(giphyArray, searchTerms) {
     let giphyChunks = _.chunk(giphyArray, 4);
 
     $giphyRow.prepend(
@@ -29,6 +35,10 @@ $(document).ready(function() {
         return $gifRow;
       })
     );
+
+    let $sectionHeader = $('<h2></h2>').text(`${searchTerms.toUpperCase()}`);
+
+    $giphyRow.prepend($sectionHeader);
   }
 
   function createGifRow(giphyArray) {
