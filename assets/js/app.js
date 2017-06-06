@@ -6,6 +6,10 @@ $(document).ready(function() {
   const $play = $('#play');
   const $pause = $('#pause');
   const $trending = $('#trendingSelector');
+  const $info = $('#info');
+
+  // state
+  let infoVisible = true;
 
   // Bind listeners
   $searchBtn.click(searchForGifs);
@@ -16,17 +20,23 @@ $(document).ready(function() {
   $play.fadeOut(0);
   $pause.fadeOut(0);
 
+  function hideInfo() {
+    if (infoVisible) {
+      $info.hide();
+      $giphyRow.css('text-align', 'left');
+      infoVisible = false;
+    }
+  }
+
   function searchForGifs(e) {
-    $giphyRow.empty();
-    $giphyRow.css('text-align', 'left');
     e.preventDefault();
+    hideInfo();
     let searchTerms = $searchText.val();
     giphy.getThatGif(searchTerms, displayGifs);
   }
 
   function getTrendingGifs() {
-    $giphyRow.empty();
-    $giphyRow.css('text-align', 'left');
+    hideInfo();
     giphy.getTrendingGifs(displayGifs);
   }
 
