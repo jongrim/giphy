@@ -17,12 +17,16 @@ $(document).ready(function() {
   $pause.fadeOut(0);
 
   function searchForGifs(e) {
+    $giphyRow.empty();
+    $giphyRow.css('text-align', 'left');
     e.preventDefault();
     let searchTerms = $searchText.val();
     giphy.getThatGif(searchTerms, displayGifs);
   }
 
   function getTrendingGifs() {
+    $giphyRow.empty();
+    $giphyRow.css('text-align', 'left');
     giphy.getTrendingGifs(displayGifs);
   }
 

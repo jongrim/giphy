@@ -19,6 +19,10 @@ body {
   color: white;
 }
 
+#giphyRow {
+  text-align: center;
+}
+
 footer {
   height: 25px;
   margin-top: -25px;
