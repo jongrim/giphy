@@ -16,7 +16,8 @@ $(document).ready(function() {
   $play.fadeOut(0);
   $pause.fadeOut(0);
 
-  function searchForGifs() {
+  function searchForGifs(e) {
+    e.preventDefault();
     let searchTerms = $searchText.val();
     giphy.getThatGif(searchTerms, displayGifs);
   }
