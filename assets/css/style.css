@@ -27,3 +27,7 @@ footer {
   height: 25px;
   margin-top: -25px;
 }
+
+a:hover {
+  cursor: pointer;
+}
