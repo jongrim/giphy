@@ -43,27 +43,17 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
-          <li><a href="#" id="trendingSelector">Trending</a></li>
-          <!--<li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>-->
+          <li><a id="trendingSelector">Trending</a></li>
         </ul>
-        <form class="navbar-form navbar-right" action='#'>
+        <form class="navbar-form navbar-right">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Search keywords" id='searchText'>
           </div>
           <button type="submit" class="btn btn-default btn-sm" id='searchBtn'>Search</button>
         </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a id="advSearchToggle">Advanced Search</a></li>
+        </ul>
       </div>
       <!-- /.navbar-collapse -->
     </div>
@@ -71,6 +61,30 @@
   </nav>
 
   <div class="container">
+    <div class="row" id="advSearchSection">
+      <form action="">
+        <div class="form-group">
+          <label for="limitNumber">Result Count</label>
+          <input type="number" id="limitNumber" class="form-control" min="1" max="50" value="12">
+        </div>
+        <div class="form-group">
+          <label for="limitRating">Rating</label>
+          <select name="limitRating" id="limitRating" class="form-control">
+            <option value="n" selected>None</option>
+            <option value="y">Y</option>
+            <option value="g">G</option>
+            <option value="pg">PG</option>
+            <option value="pg-13">PG-13</option>
+            <option value="r">R</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="advSearchText">Search Keywords</label>
+          <input type="text" class="form-control" placeholder="Search keywords" id='advSearchText'>
+        </div>
+        <button type="submit" class="btn btn-default btn-sm" id='advSearchBtn'>Search</button>
+      </form>
+    </div>
     <div class="row" id="giphyRow">
       <h3 class="text-muted" id="info">Use the search bar to search for gifs, or click Trending to view the new hotness</h3>
     </div>

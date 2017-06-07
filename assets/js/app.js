@@ -7,6 +7,8 @@ $(document).ready(function() {
   const $pause = $('#pause');
   const $trending = $('#trendingSelector');
   const $info = $('#info');
+  const $advSearchBtn = $('#advSearchToggle');
+  const $advSearchRow = $('#advSearchSection');
 
   // state
   let infoVisible = true;
@@ -15,10 +17,18 @@ $(document).ready(function() {
   $searchBtn.click(searchForGifs);
   $('img').click(changeState);
   $trending.click(getTrendingGifs);
+  $advSearchBtn.click(showAdvancedSearch);
 
   // hide glyphicons to start
   $play.fadeOut(0);
   $pause.fadeOut(0);
+
+  // hide advanced search section
+  $advSearchRow.hide();
+
+  function showAdvancedSearch() {
+    $advSearchRow.slideToggle();
+  }
 
   function hideInfo() {
     if (infoVisible) {
