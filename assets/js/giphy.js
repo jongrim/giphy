@@ -1,7 +1,7 @@
 var giphy = (function() {
   var apiKey = 'dc6zaTOxFJmzC';
 
-  function buildSearchURL(query) {
+  function buildSearchURL(query, params) {
     var searchTerms = query.split(' ');
 
     var url = 'https://api.giphy.com/v1/gifs/search?q=';
@@ -13,7 +13,12 @@ var giphy = (function() {
       }
     });
 
-    url += '&limit=12';
+    for (var n in params) {
+      if (params.hasOwnProperty(n)) {
+        url += `&${n}=${params[n]}`;
+      }
+    }
+
     url += `&api_key=${apiKey}`;
     return url;
   }
@@ -35,12 +40,15 @@ var giphy = (function() {
     });
   }
 
-  function getThatGif(query, fn) {
+  function getThatGif(query, fn, params) {
     if (query.length <= 0) {
       return;
     }
+    if (!params) {
+      params = { limit: 12 };
+    }
     $.get({
-      url: buildSearchURL(query),
+      url: buildSearchURL(query, params),
       success: function(response) {
         fn(processData(response), query);
       },

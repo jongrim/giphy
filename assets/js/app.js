@@ -7,8 +7,9 @@ $(document).ready(function() {
   const $pause = $('#pause');
   const $trending = $('#trendingSelector');
   const $info = $('#info');
-  const $advSearchBtn = $('#advSearchToggle');
+  const $advSearchToggle = $('#advSearchToggle');
   const $advSearchRow = $('#advSearchSection');
+  const $advSearchBtn = $('#advSearchBtn');
 
   // state
   let infoVisible = true;
@@ -17,7 +18,8 @@ $(document).ready(function() {
   $searchBtn.click(searchForGifs);
   $('img').click(changeState);
   $trending.click(getTrendingGifs);
-  $advSearchBtn.click(showAdvancedSearch);
+  $advSearchToggle.click(showAdvancedSearch);
+  $advSearchBtn.click(advancedSearch);
 
   // hide glyphicons to start
   $play.fadeOut(0);
@@ -28,6 +30,22 @@ $(document).ready(function() {
 
   function showAdvancedSearch() {
     $advSearchRow.slideToggle();
+  }
+
+  function advancedSearch(e) {
+    e.preventDefault();
+    let limitNumber = $('#limitNumber').val();
+    let limitRating = $('#limitRating').val();
+    let searchKeywords = $('#advSearchText').val().trim();
+
+    hideInfo();
+
+    let params = { limit: limitNumber };
+    if (limitRating !== 'n') {
+      params.rating = limitRating;
+    }
+
+    giphy.getThatGif(searchKeywords, displayGifs, params);
   }
 
   function hideInfo() {
